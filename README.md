@@ -2,7 +2,7 @@
 
 CodePath WEB103 Final Project
 
-Designed and developed by: [Add all group members’ names]
+Designed and developed by: Yugant Nagralawala, Arnold Waigwa, and Yingshu Wang
 
 🔗 Link to deployed app: Coming soon — planned deployment on Render.
 

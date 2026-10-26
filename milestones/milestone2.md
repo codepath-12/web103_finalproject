@@ -12,18 +12,18 @@ This unit, be sure to complete all tasks listed below. To complete a task, place
   - [x] Your entity relationship diagram should include the tables in your database.
 - [ ] Prepare your three-minute pitch presentation, to be presented during Unit 7 (the next unit).
   - [ ] You do **not** need to submit any materials in advance of your pitch.
-- [ ] In this document, complete all three questions in the **Reflection** section below
+- [x] In this document, complete all three questions in the **Reflection** section below
 
 ## Reflection
 
 ### 1. What went well during this unit?
 
-**Draft for team review:** We turned the written plan into visuals. The wireframes for the trips list, create trip, trip details, and expenses pages made the user flow concrete, including where voting, date filtering, and validation messages appear. The ERD mapped directly onto the planned features: `trip_members` and `activity_votes` cover the two many-to-many relationships, and trips have one-to-many relationships with activities and expenses.
+We turned the written plan into visuals. The wireframes for the trips list, create trip, trip details, and expenses pages made the user flow concrete, including where voting, date filtering, and validation messages appear. The ERD mapped directly onto the planned features: `trip_members` and `activity_votes` cover the two many-to-many relationships, and trips have one-to-many relationships with activities and expenses.
 
 ### 2. What were some challenges your group faced in this unit?
 
-**Draft for team review:** The main challenge was deciding how much to put on the trip details page, since members, the itinerary, voting, and the activity form all live there. We also had to decide how to store invite codes and how to handle activities without a date. Without authentication, we have to decide how the demo-user selector enforces organizer-only actions. Fitting the pitch into three minutes is another challenge.
+The main challenge was deciding how much to put on the trip details page, since members, the itinerary, voting, and the activity form all live there. We also had to decide how to store invite codes and how to handle activities without a date. Without authentication, we have to decide how the demo-user selector enforces organizer-only actions. Fitting the pitch into three minutes is another challenge.
 
 ### 3. What additional support will you need in upcoming units as you continue to work on your final project?
 
-**Draft for team review:** We would like feedback on the schema, especially the `trip_members` role design and the voting constraint, and on whether the trip details page is too crowded. In the next unit we need help setting up GitHub issues and a project board, and later help connecting the React frontend to the Express API and deploying both with PostgreSQL on Render.
+We would like feedback on the schema, especially the `trip_members` role design and the voting constraint, and on whether the trip details page is too crowded. In the next unit we need help setting up GitHub issues and a project board, and later help connecting the React frontend to the Express API and deploying both with PostgreSQL on Render.

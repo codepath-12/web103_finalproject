@@ -88,4 +88,45 @@ The initial version focuses on trip planning, voting, and expense records. User 
 
 ## Installation Instructions
 
-To be added when the frontend, backend, and database setup are implemented.
+### Express backend
+
+Requires Node.js 20+ and a PostgreSQL database (local or hosted).
+
+```bash
+cd server
+npm ci
+cp .env.example .env
+```
+
+Edit `server/.env` and replace `DATABASE_URL` with your database connection URL.
+Keep any TLS parameters supplied by your database provider. Each teammate keeps
+their own `.env`; do not commit credentials. `CLIENT_ORIGIN` defaults to
+`http://localhost:5173` and should match the React frontend's origin.
+
+```bash
+npm run dev
+```
+
+The API defaults to port 3001. Check the actual database connection with:
+
+```bash
+curl -i http://localhost:3001/api/health
+```
+
+A successful database query returns HTTP 200 with
+`{"status":"ok","database":"connected"}`. An unavailable database returns
+HTTP 503 with `{"status":"error","database":"unavailable"}`. Starting the
+server alone does not confirm database connectivity. A missing `DATABASE_URL`
+stops startup with a configuration error.
+
+Use `npm start` to run without watch mode. For hosting, set the service root to
+`server`, build command to `npm ci`, start command to `npm start`, and configure
+`DATABASE_URL` and `CLIENT_ORIGIN` in the host's environment settings.
+
+### Development database reset
+
+`npm run reset -- --confirm` runs `server/db/schema.sql` followed by
+`server/db/seed.sql` in a transaction. This replaces development data, so verify
+the target `DATABASE_URL` first. Reset is disabled when `NODE_ENV=production`.
+The SQL files are pending the schema/seed implementation; until they are added,
+the command reports the missing files without modifying the database.

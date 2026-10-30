@@ -128,5 +128,11 @@ Use `npm start` to run without watch mode. For hosting, set the service root to
 `npm run reset -- --confirm` runs `server/db/schema.sql` followed by
 `server/db/seed.sql` in a transaction. This replaces development data, so verify
 the target `DATABASE_URL` first. Reset is disabled when `NODE_ENV=production`.
-The SQL files are pending the schema/seed implementation; until they are added,
-the command reports the missing files without modifying the database.
+The SQL implements the six tables in the ERD and seeds three demo users, two
+trips, memberships, activities, votes, and expenses. See `server/db/README.md`
+for sample IDs and invite codes. API authorization and cross-table validation
+remain part of the feature endpoints.
+
+Run `npm run test:db` from `server/` to verify repeatable resets, constraints,
+and deletion behavior in an isolated test schema. Tests roll back their data
+without resetting the application tables.

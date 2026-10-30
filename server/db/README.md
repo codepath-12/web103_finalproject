@@ -1,11 +1,24 @@
 # Database SQL
 
-The schema and sample data are not implemented yet. Add `schema.sql` and
-`seed.sql` here when implementing the ERD in `planning/entity_relationship_diagram.md`.
+`schema.sql` implements the six tables from the project ERD. `seed.sql` adds
+three demo users, two trips, five memberships, five activities (including an
+unscheduled suggestion), seven votes, and three expenses.
 
-`schema.sql` should recreate the application tables, and `seed.sql` should insert
-sample data. Do not put BEGIN/COMMIT in these files: the reset script runs both
-in one transaction. Use this only with a dedicated development database.
+From `server/`, run `npm run reset -- --confirm` against a dedicated development
+database. It drops and recreates the six application tables and inserts sample
+data in one transaction. Existing application data is replaced. Unrelated
+tables are not dropped; external dependencies on application tables cause a
+rollback. Reset is disabled when `NODE_ENV=production`.
 
-Until both files exist, the reset command exits with an explanation and does
-not change the database.
+Seeded trip IDs are 1 and 2. User IDs are 1 (Yingshu), 2 (Yugant), and 3 (Arnold).
+The invite codes are `SEATTLE26` and `PORTLAND26`. These users are demo data,
+not authenticated accounts. Both trips include their organizer as a member.
+
+Uniqueness, foreign keys, roles, monetary limits, and trip date order are
+enforced in SQL. As specified in the ERD, membership authorization, organizer
+protection, activity date boundaries, and vote eligibility still need API
+validation. Future PATCH handlers must explicitly update `updated_at`.
+
+Run `npm run test:db` to validate the SQL using the configured PostgreSQL
+connection. Tests use a unique schema inside a transaction and roll back all
+test objects and data; they do not reset the application tables.

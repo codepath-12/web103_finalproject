@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "node --watch index.js",
     "start": "node index.js",
-    "reset": "node scripts/reset.js"
+    "reset": "node scripts/reset.js",
+    "test:db": "node --test tests/database.test.js"
   },
   "dependencies": {
     "cors": "^2.8.6",

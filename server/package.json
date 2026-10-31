@@ -7,8 +7,8 @@
     "node": ">=20"
   },
   "scripts": {
-    "dev": "node --watch index.js",
-    "start": "node index.js",
+    "dev": "node --watch server.js",
+    "start": "node server.js",
     "reset": "node scripts/reset.js"
   },
   "dependencies": {

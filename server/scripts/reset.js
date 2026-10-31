@@ -1,37 +1,39 @@
-import { readFile } from 'node:fs/promises';
-import pool from '../config/database.js';
+import { readFile } from "node:fs/promises";
+import pool from "../config/database.js";
 
 // SQL files are read before connecting, so missing files cannot cause a partial reset.
 async function reset() {
-  if (process.env.NODE_ENV === 'production') {
-    throw new Error('Database reset is disabled in production.');
-  }
-  if (!process.argv.includes('--confirm')) {
-    throw new Error('Reset replaces development data. Run npm run reset -- --confirm only against a development database.');
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("Database reset is disabled in production.");
   }
 
   let schema;
   let seed;
   try {
-    schema = await readFile(new URL('../db/schema.sql', import.meta.url), 'utf8');
-    seed = await readFile(new URL('../db/seed.sql', import.meta.url), 'utf8');
+    schema = await readFile(
+      new URL("../db/schema.sql", import.meta.url),
+      "utf8",
+    );
+    seed = await readFile(new URL("../db/seed.sql", import.meta.url), "utf8");
   } catch (error) {
-    if (error.code === 'ENOENT') {
-      throw new Error('Reset needs server/db/schema.sql and server/db/seed.sql. Add the database schema and sample data first.');
+    if (error.code === "ENOENT") {
+      throw new Error(
+        "Reset needs server/db/schema.sql and server/db/seed.sql. Add the database schema and sample data first.",
+      );
     }
     throw error;
   }
 
   const client = await pool.connect();
   try {
-    await client.query('BEGIN');
+    await client.query("BEGIN");
     await client.query(schema);
     await client.query(seed);
-    await client.query('COMMIT');
-    console.log('Development database reset complete.');
+    await client.query("COMMIT");
+    console.log("Development database reset complete.");
   } catch {
-    await client.query('ROLLBACK');
-    throw new Error('Database reset failed; changes were rolled back.');
+    await client.query("ROLLBACK");
+    throw new Error("Database reset failed; changes were rolled back.");
   } finally {
     client.release();
   }

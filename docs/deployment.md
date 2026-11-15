@@ -4,6 +4,17 @@ TripTogether runs as one Node Web Service: Express serves both the built React
 app and `/api`. The database is the existing Render Postgres instance. There is
 no separate frontend service or production Vite proxy.
 
+## Current service
+
+- Live URL: https://triptogether-web103-yingshu.onrender.com
+- Dashboard: https://dashboard.render.com/web/srv-dbt3l7mk1f9s73aoljeg
+- Initial deployed branch: `yingshu/render-deploy`; move to `main` after review and merge.
+- Uses the existing `triptogether-db` in Oregon.
+- The initial service reuses the development OAuth App with a separate production
+  session secret. Add the live callback as an additional redirect URI in that
+  GitHub OAuth App; preserve the localhost callback for teammates. A dedicated
+  production OAuth App can be used later by updating only Render credentials.
+
 ## Web Service settings
 
 Connect the `codepath-12/web103_finalproject` GitHub repository and use:
@@ -44,8 +55,9 @@ Leave `PORT` unset; Render supplies it. Services and database must be in the sam
 workspace and region for the internal database URL. The database's external IP
 rules are for local computers, not same-region private connections.
 
-Register a separate GitHub OAuth App for the live site so local development can
-keep its `http://localhost:5173` callback. Set its Homepage URL to `CLIENT_URL`
+You can register a separate GitHub OAuth App for the live site, or add the live
+callback as an additional redirect URI to the existing App. Preserve the
+`http://localhost:5173` callback for local development. Set its Homepage URL to `CLIENT_URL`
 and its redirect URI to `GITHUB_CALLBACK_URL`. Fill credentials into Render
 directly; they do not belong in the repository or an issue.
 
